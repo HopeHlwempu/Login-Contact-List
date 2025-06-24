@@ -1,0 +1,93 @@
+/* index.css */
+
+:root {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: #ffc0e0;
+  background-color: #1a001f;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 600;
+  color: #ff8ad1;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+a:hover {
+  color: #ffb3ec;
+  text-shadow: 0 0 6px #ffb3ecaa;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a001f, #330033, #4a0033);
+  color: #ffc0e0;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: #ff75c3;
+  text-shadow: 0 0 10px #ff99cc;
+}
+
+button {
+  border-radius: 10px;
+  border: none;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: inherit;
+  background-color: #2a002a;
+  color: #ffb3ec;
+  cursor: pointer;
+  box-shadow: 0 0 0 transparent;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+  background-color: #ff66cc;
+  color: #fff;
+  box-shadow: 0 0 8px #ff66cc, 0 0 12px #ff99cc;
+}
+
+button:focus,
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px #ff99cc88;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #4a0033;
+    background-color: #ffeef8;
+  }
+  a {
+    color: #cc4a8f;
+  }
+  a:hover {
+    color: #ff66cc;
+    text-shadow: 0 0 6px #ffa3d1;
+  }
+  button {
+    background-color: #ffe1f0;
+    color: #cc4a8f;
+  }
+  button:hover {
+    background-color: #ffccf3;
+    color: #4a0033;
+    box-shadow: 0 0 8px #ffa3d1;
+  }
+}

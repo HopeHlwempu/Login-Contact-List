@@ -1,0 +1,230 @@
+/* app.css */
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #1a001f, #330033, #4a0033);
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  color: #ff75c3; /* keep that girly pop color */
+}
+
+h1, h2 {
+  color: #ff75c3;
+  text-shadow: 0 0 10px #ff99cc;
+  font-weight: 700;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms, transform 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #ff8ad1aa); /* pink glow */
+  transform: scale(1.05);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #ffb3ecaa); /* lighter glow */
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+  background: rgba(255, 255, 255, 0.05); /* light glass effect */
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
+  margin: 1em auto;
+  max-width: 600px;
+}
+
+.read-the-docs {
+  color: #ff8ad1;
+  font-style: italic;
+}
+
+table {
+  margin: 2rem auto;
+  border-collapse: separate;
+  border-spacing: 1.5rem 1rem;
+  text-align: left;
+}
+
+th {
+  padding-bottom: 0.5rem;
+  font-weight: bold;
+  color: #ff8ad1;
+}
+
+td {
+  padding: 0.25rem 0.5rem;
+  color: #ffc0e0;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.actions button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-weight: bold;
+  background-color: #1a001a;
+  color: #ffb3ec;
+  border: none;
+  box-shadow: 0 0 0 transparent;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.actions button:hover {
+  background-color: #ff66cc;
+  color: #fff;
+  box-shadow: 0 0 10px #ff66cc, 0 0 20px #ff99cc;
+  cursor: pointer;
+}
+
+.create-btn {
+  margin-top: 2rem;
+  padding: 0.8rem 1.5rem;
+  background-color: #0f001a;
+  color: #ffb3ec;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.create-btn:hover {
+  background-color: #2a002a;
+  box-shadow: 0 0 12px #ff66cc, 0 0 18px #ff99cc;
+  color: white;
+  cursor: pointer;
+}
+
+/* New styles for login integration */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header button {
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 600;
+  border-radius: 10px;
+  background-color: #2a002a;
+  color: #ffb3ec;
+  border: none;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.header button:hover {
+  background-color: #ff4d94;
+  color: #fff;
+  box-shadow: 0 0 8px #ff66cc, 0 0 12px #ff99cc;
+}
+
+.header button:focus,
+.header button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px #ff99cc88;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(26, 0, 31, 0.7); /* Dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.05); /* Glass effect */
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
+  position: relative;
+  max-width: 500px;
+  width: 90%;
+  color: #ffc0e0;
+}
+
+.modal-content form label {
+  color: #ff8ad1;
+  font-weight: 600;
+  text-align: left;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.modal-content form input {
+  width: 100%;
+  padding: 0.6em;
+  font-size: 1em;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffc0e0;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s;
+}
+
+.modal-content form input:focus {
+  outline: none;
+  box-shadow: 0 0 8px #ff99cc88;
+}
+
+.modal-content form button {
+  width: 100%;
+  padding: 0.6em;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.5rem;
+  color: #ff8ad1;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: #ff66cc;
+  text-shadow: 0 0 6px #ff99cc;
+}
