@@ -1,48 +1,64 @@
-import React from "react"
+import React from "react";
 
 const ContactList = ({ contacts, updateContact, updateCallback }) => {
     const onDelete = async (id) => {
         try {
             const options = {
-                method: "DELETE"
-            }
-            const response = await fetch(`http://127.0.0.1:5000/delete_contact/${id}`, options)
+                method: "DELETE",
+                credentials: "include", // Include cookies for session
+            };
+            const response = await fetch(
+                `http://127.0.0.1:5000/delete_contact/${id}`,
+                options
+            );
             if (response.status === 200) {
-                updateCallback()
+                updateCallback();
             } else {
-                console.error("Failed to delete")
+                console.error("Failed to delete");
             }
         } catch (error) {
-            alert(error)
+            alert(error);
         }
-    }
+    };
 
-    return <div>
-        <h2>Contacts</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {contacts.map((contact) => (
-                    <tr key={contact.id}>
-                        <td>{contact.firstName}</td>
-                        <td>{contact.lastName}</td>
-                        <td>{contact.email}</td>
-                        <td>
-                            <button onClick={() => updateContact(contact)}>Update</button>
-                            <button onClick={() => onDelete(contact.id)}>Delete</button>
-                        </td>
+    return (
+        <div className="mb-4">
+            <h2 className="text-xl font-bold mb-2">Contacts</h2>
+            <table className="table-auto w-full border-collapse border">
+                <thead>
+                    <tr className="bg-gray-200">
+                        <th className="border p-2">First Name</th>
+                        <th className="border p-2">Last Name</th>
+                        <th className="border p-2">Email</th>
+                        <th className="border p-2">Actions</th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
-    </div>
-}
+                </thead>
+                <tbody>
+                    {contacts.map((contact) => (
+                        <tr key={contact.id}>
+                            <td className="border p-2">{contact.firstName}</td>
+                            <td className="border p-2">{contact.lastName}</td>
+                            <td className="border p-2">{contact.email}</td>
+                            <td className="border p-2">
+                                <button
+                                    className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded mr-2"
+                                    onClick={() => updateContact(contact)}
+                                >
+                                    Update
+                                </button>
+                                <button
+                                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                                    onClick={() => onDelete(contact.id)}
+                                >
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
+};
 
-export default ContactList
+export default ContactList;
