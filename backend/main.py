@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request, jsonify, session
 from config import app, db
 from models import Contact, User
 from flask_login import LoginManager, login_user, login_required, logout_user
@@ -6,6 +6,14 @@ import logging
 
 # Set up logging to debug server errors
 logging.basicConfig(level=logging.DEBUG)
+
+# Configure session cookie settings for cross-origin requests
+app.config.update(
+    SESSION_COOKIE_SAMESITE='None',  # Allow cookies in cross-origin requests
+    SESSION_COOKIE_SECURE=True,     # Require HTTPS (set to False for local development without HTTPS)
+    SESSION_COOKIE_HTTPONLY=True,   # Prevent JavaScript access to cookies
+    SESSION_COOKIE_DOMAIN=None      # Default to server domain (localhost for dev)
+)
 
 # Initialize Flask-Login
 login_manager = LoginManager()
@@ -29,6 +37,8 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user and user.check_password(password):
             login_user(user)
+            session.permanent = True  # Enable persistent session
+            app.logger.debug(f"User {username} logged in with persistent session")
             return jsonify({"message": "Logged in successfully"}), 200
         return jsonify({"message": "Invalid credentials"}), 401
     except Exception as e:
@@ -40,6 +50,8 @@ def login():
 def logout():
     try:
         logout_user()
+        session.pop('_user_id', None)  # Clear session data
+        app.logger.debug("User logged out successfully")
         return jsonify({"message": "Logged out successfully"}), 200
     except Exception as e:
         app.logger.error(f"Logout error: {str(e)}")
