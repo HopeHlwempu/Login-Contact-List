@@ -2,6 +2,7 @@ from config import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+
 class Contact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(80), unique=False, nullable=False)
@@ -15,6 +16,7 @@ class Contact(db.Model):
             "lastName": self.last_name,
             "email": self.email,
         }
+
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

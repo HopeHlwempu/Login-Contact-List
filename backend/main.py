@@ -20,6 +20,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
+
 @login_manager.user_loader
 def load_user(user_id):
     try:
@@ -27,6 +28,7 @@ def load_user(user_id):
     except Exception as e:
         app.logger.error(f"Error loading user: {str(e)}")
         return None
+
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -45,6 +47,7 @@ def login():
         app.logger.error(f"Login error: {str(e)}")
         return jsonify({"message": f"Server error: {str(e)}"}), 500
 
+
 @app.route("/logout", methods=["POST"])
 @login_required
 def logout():
@@ -57,6 +60,7 @@ def logout():
         app.logger.error(f"Logout error: {str(e)}")
         return jsonify({"message": f"Server error: {str(e)}"}), 500
 
+
 @app.route("/contacts", methods=["GET"])
 @login_required
 def get_contacts():
@@ -67,6 +71,7 @@ def get_contacts():
     except Exception as e:
         app.logger.error(f"Get contacts error: {str(e)}")
         return jsonify({"message": f"Server error: {str(e)}"}), 500
+
 
 @app.route("/create_contact", methods=["POST"])
 @login_required
@@ -90,6 +95,7 @@ def create_contact():
         app.logger.error(f"Create contact error: {str(e)}")
         return jsonify({"message": f"Server error: {str(e)}"}), 500
 
+
 @app.route("/update_contact/<int:user_id>", methods=["PATCH"])
 @login_required
 def update_contact(user_id):
@@ -110,6 +116,7 @@ def update_contact(user_id):
         app.logger.error(f"Update contact error: {str(e)}")
         return jsonify({"message": f"Server error: {str(e)}"}), 500
 
+
 @app.route("/delete_contact/<int:user_id>", methods=["DELETE"])
 @login_required
 def delete_contact(user_id):
@@ -125,6 +132,7 @@ def delete_contact(user_id):
     except Exception as e:
         app.logger.error(f"Delete contact error: {str(e)}")
         return jsonify({"message": f"Server error: {str(e)}"}), 500
+
 
 if __name__ == "__main__":
     with app.app_context():
