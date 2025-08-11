@@ -14,3 +14,4 @@ with app.app_context():
         db.session.add(user)
     db.session.commit()
     print("Demo user setup complete: username=demo_user, password=password")
+    

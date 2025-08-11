@@ -94,6 +94,7 @@ function App() {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
+        console.log("Checking login status...");
         const response = await fetch("http://127.0.0.1:5000/contacts", {
           credentials: "include",
         });
