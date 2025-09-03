@@ -9,7 +9,6 @@ const ContactForm = ({ existingContact = {}, updateCallback }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
         const data = {
             firstName,
             lastName,
@@ -18,13 +17,14 @@ const ContactForm = ({ existingContact = {}, updateCallback }) => {
         const url = `http://127.0.0.1:5000/${
             updating ? `update_contact/${existingContact.id}` : "create_contact"
         }`;
+        const token = localStorage.getItem("token");
         const options = {
             method: updating ? "PATCH" : "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
             },
             body: JSON.stringify(data),
-            credentials: "include", // Include cookies for session
         };
         const response = await fetch(url, options);
         if (response.status !== 201 && response.status !== 200) {

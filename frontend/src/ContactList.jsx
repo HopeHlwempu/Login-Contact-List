@@ -3,9 +3,12 @@ import React from "react";
 const ContactList = ({ contacts, updateContact, updateCallback }) => {
     const onDelete = async (id) => {
         try {
+            const token = localStorage.getItem("token");
             const options = {
                 method: "DELETE",
-                credentials: "include", // Include cookies for session
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                },
             };
             const response = await fetch(
                 `http://127.0.0.1:5000/delete_contact/${id}`,

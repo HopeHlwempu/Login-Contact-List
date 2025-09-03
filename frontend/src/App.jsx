@@ -11,11 +11,19 @@ function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isRegistering, setIsRegistering] = useState(false);
 
   const fetchContacts = async () => {
     try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setIsLoggedIn(false);
+        return;
+      }
       const response = await fetch("http://127.0.0.1:5000/contacts", {
-        credentials: "include",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
       });
       if (response.ok) {
         const data = await response.json();
@@ -23,10 +31,33 @@ function App() {
         setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);
+        localStorage.removeItem("token");
       }
     } catch (err) {
       setError("Failed to connect to the server");
       setIsLoggedIn(false);
+    }
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://127.0.0.1:5000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setError("");
+        setIsRegistering(false); // Switch to login form
+      } else {
+        setError(data.message);
+      }
+    } catch (err) {
+      setError("Failed to connect to the server");
     }
   };
 
@@ -39,10 +70,10 @@ function App() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, password }),
-        credentials: "include",
       });
       const data = await response.json();
       if (response.ok) {
+        localStorage.setItem("token", data.token);
         setIsLoggedIn(true);
         setError("");
         await fetchContacts();
@@ -56,10 +87,7 @@ function App() {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://127.0.0.1:5000/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+      localStorage.removeItem("token");
       setIsLoggedIn(false);
       setContacts([]);
       setUsername("");
@@ -90,21 +118,10 @@ function App() {
     fetchContacts();
   };
 
-  // Check login status on page load without triggering /contacts
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        console.log("Checking login status...");
-        const response = await fetch("http://127.0.0.1:5000/contacts", {
-          credentials: "include",
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setContacts(data.contacts);
-          setIsLoggedIn(true);
-        } else {
-          setIsLoggedIn(false);
-        }
+        await fetchContacts();
       } catch (err) {
         setIsLoggedIn(false);
       }
@@ -117,14 +134,11 @@ function App() {
       {!isLoggedIn ? (
         <div className="bg-white shadow-md rounded-lg p-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-            Contact Manager Login
+            {isRegistering ? "Register for Contact Manager" : "Contact Manager Login"}
           </h2>
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={isRegistering ? handleRegister : handleLogin} className="space-y-4">
             <div>
-              <label
-                htmlFor="username"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                 Username
               </label>
               <input
@@ -137,10 +151,7 @@ function App() {
               />
             </div>
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
               <input
@@ -152,16 +163,20 @@ function App() {
                 placeholder="Enter password"
               />
             </div>
-            {error && (
-              <p className="text-red-500 text-sm text-center">{error}</p>
-            )}
+            {error && <p className="text-red-500 text-sm text-center">{error}</p>}
             <button
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-md transition duration-200"
             >
-              Login
+              {isRegistering ? "Register" : "Login"}
             </button>
           </form>
+          <button
+            className="w-full mt-4 text-blue-600 hover:underline"
+            onClick={() => setIsRegistering(!isRegistering)}
+          >
+            {isRegistering ? "Switch to Login" : "Switch to Register"}
+          </button>
         </div>
       ) : (
         <>
