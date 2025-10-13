@@ -10,7 +10,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState(""); // Changed from 'error' to 'message' for success/error
   const [isRegistering, setIsRegistering] = useState(false);
 
   const fetchContacts = async () => {
@@ -18,6 +18,7 @@ function App() {
       const token = localStorage.getItem("token");
       if (!token) {
         setIsLoggedIn(false);
+        setMessage("Please log in to view contacts.");
         return;
       }
       const response = await fetch("http://127.0.0.1:5000/contacts", {
@@ -29,12 +30,15 @@ function App() {
         const data = await response.json();
         setContacts(data.contacts);
         setIsLoggedIn(true);
+        setMessage(""); // Clear message on successful fetch
       } else {
+        const data = await response.json();
         setIsLoggedIn(false);
         localStorage.removeItem("token");
+        setMessage(data.message || "Failed to fetch contacts.");
       }
     } catch (err) {
-      setError("Failed to connect to the server");
+      setMessage("Failed to connect to the server.");
       setIsLoggedIn(false);
     }
   };
@@ -51,13 +55,15 @@ function App() {
       });
       const data = await response.json();
       if (response.ok) {
-        setError("");
-        setIsRegistering(false); // Switch to login form
+        setMessage("Registration successful! Please log in.");
+        setIsRegistering(false);
+        setUsername("");
+        setPassword("");
       } else {
-        setError(data.message);
+        setMessage(data.message || "Registration failed.");
       }
     } catch (err) {
-      setError("Failed to connect to the server");
+      setMessage("Failed to connect to the server.");
     }
   };
 
@@ -75,26 +81,35 @@ function App() {
       if (response.ok) {
         localStorage.setItem("token", data.token);
         setIsLoggedIn(true);
-        setError("");
+        setMessage("Logged in successfully!");
+        setUsername("");
+        setPassword("");
         await fetchContacts();
       } else {
-        setError(data.message);
+        setMessage(data.message || "Login failed.");
       }
     } catch (err) {
-      setError("Failed to connect to the server");
+      setMessage("Failed to connect to the server.");
     }
   };
 
   const handleLogout = async () => {
     try {
+      const response = await fetch("http://127.0.0.1:5000/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
       localStorage.removeItem("token");
       setIsLoggedIn(false);
       setContacts([]);
       setUsername("");
       setPassword("");
-      setError("");
+      setMessage(data.message || "Logged out successfully.");
     } catch (err) {
-      setError("Failed to logout");
+      setMessage("Failed to logout.");
     }
   };
 
@@ -136,6 +151,11 @@ function App() {
           <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
             {isRegistering ? "Register for Contact Manager" : "Contact Manager Login"}
           </h2>
+          {message && (
+            <p className={`text-sm text-center ${message.includes("success") ? "text-green-500" : "text-red-500"}`}>
+              {message}
+            </p>
+          )}
           <form onSubmit={isRegistering ? handleRegister : handleLogin} className="space-y-4">
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700">
@@ -163,7 +183,6 @@ function App() {
                 placeholder="Enter password"
               />
             </div>
-            {error && <p className="text-red-500 text-sm text-center">{error}</p>}
             <button
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-md transition duration-200"
@@ -180,6 +199,11 @@ function App() {
         </div>
       ) : (
         <>
+          {message && (
+            <p className={`text-sm text-center ${message.includes("success") ? "text-green-500" : "text-red-500"}`}>
+              {message}
+            </p>
+          )}
           <button
             className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md mb-6 transition duration-200"
             onClick={handleLogout}

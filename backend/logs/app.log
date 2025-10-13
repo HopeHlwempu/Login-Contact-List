@@ -1,0 +1,50 @@
+[2025-10-13 19:41:30] WARNING:  * Debugger is active!
+[2025-10-13 19:41:30] INFO:  * Debugger PIN: 561-662-242
+[2025-10-13 19:41:59] INFO:  * Detected change in 'C:\\Users\\nosip\\OneDrive\\Desktop\\Login Contact List\\backend\\main.py', reloading
+[2025-10-13 19:42:01] WARNING:  * Debugger is active!
+[2025-10-13 19:42:01] INFO:  * Debugger PIN: 561-662-242
+[2025-10-13 19:44:54] INFO:  * Detected change in 'C:\\Users\\nosip\\OneDrive\\Desktop\\Login Contact List\\backend\\main.py', reloading
+[2025-10-13 19:44:56] WARNING:  * Debugger is active!
+[2025-10-13 19:44:56] INFO:  * Debugger PIN: 561-662-242
+[2025-10-13 19:44:57] INFO: 127.0.0.1 - - [13/Oct/2025 19:44:57] "OPTIONS /contacts HTTP/1.1" 200 -
+[2025-10-13 19:44:57] INFO: 127.0.0.1 - - [13/Oct/2025 19:44:57] "OPTIONS /contacts HTTP/1.1" 200 -
+[2025-10-13 19:44:57] DEBUG: Token validated successfully for user 'demo_user'
+[2025-10-13 19:44:57] INFO: Fetched 0 contacts successfully
+[2025-10-13 19:44:57] INFO: 127.0.0.1 - - [13/Oct/2025 19:44:57] "GET /contacts HTTP/1.1" 200 -
+[2025-10-13 19:44:57] DEBUG: Token validated successfully for user 'demo_user'
+[2025-10-13 19:44:57] INFO: Fetched 0 contacts successfully
+[2025-10-13 19:44:57] INFO: 127.0.0.1 - - [13/Oct/2025 19:44:57] "GET /contacts HTTP/1.1" 200 -
+[2025-10-13 19:45:12] INFO: 127.0.0.1 - - [13/Oct/2025 19:45:12] "OPTIONS /login HTTP/1.1" 200 -
+[2025-10-13 19:45:12] ERROR: Login failed: User does not exist - Please Register for user 'thatohlwempu'
+[2025-10-13 19:45:12] INFO: 127.0.0.1 - - [13/Oct/2025 19:45:12] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+[2025-10-13 19:48:44] INFO: 127.0.0.1 - - [13/Oct/2025 19:48:44] "OPTIONS /login HTTP/1.1" 200 -
+[2025-10-13 19:48:44] ERROR: Login failed: User does not exist - Please Register for user 'thatohlwempu'
+[2025-10-13 19:48:44] INFO: 127.0.0.1 - - [13/Oct/2025 19:48:44] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+[2025-10-13 19:48:54] INFO: 127.0.0.1 - - [13/Oct/2025 19:48:54] "OPTIONS /register HTTP/1.1" 200 -
+[2025-10-13 19:48:54] INFO: User registered successfully! for user 'thatohlwempu'
+[2025-10-13 19:48:54] INFO: 127.0.0.1 - - [13/Oct/2025 19:48:54] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+[2025-10-13 19:49:14] INFO: 127.0.0.1 - - [13/Oct/2025 19:49:14] "OPTIONS /login HTTP/1.1" 200 -
+[2025-10-13 19:49:14] INFO: User logged in successfully for user 'thatohlwempu'
+[2025-10-13 19:49:14] INFO: 127.0.0.1 - - [13/Oct/2025 19:49:14] "POST /login HTTP/1.1" 200 -
+[2025-10-13 19:49:14] INFO: 127.0.0.1 - - [13/Oct/2025 19:49:14] "OPTIONS /contacts HTTP/1.1" 200 -
+[2025-10-13 19:49:14] DEBUG: Token validated successfully for user 'thatohlwempu'
+[2025-10-13 19:49:14] INFO: Fetched 0 contacts successfully
+[2025-10-13 19:49:14] INFO: 127.0.0.1 - - [13/Oct/2025 19:49:14] "GET /contacts HTTP/1.1" 200 -
+[2025-10-13 19:49:17] INFO: 127.0.0.1 - - [13/Oct/2025 19:49:17] "OPTIONS /logout HTTP/1.1" 200 -
+[2025-10-13 19:49:17] INFO: User logged out successfully
+[2025-10-13 19:49:17] INFO: 127.0.0.1 - - [13/Oct/2025 19:49:17] "POST /logout HTTP/1.1" 200 -
+[2025-10-13 19:51:33] INFO:  * Detected change in 'C:\\Users\\nosip\\OneDrive\\Desktop\\Login Contact List\\backend\\main.py', reloading
+[2025-10-13 19:51:36] WARNING:  * Debugger is active!
+[2025-10-13 19:51:36] INFO:  * Debugger PIN: 561-662-242
+[2025-10-13 19:53:25] INFO:  * Detected change in 'C:\\Users\\nosip\\OneDrive\\Desktop\\Login Contact List\\backend\\main.py', reloading
+[2025-10-13 19:53:27] WARNING:  * Debugger is active!
+[2025-10-13 19:53:27] INFO:  * Debugger PIN: 561-662-242
+[2025-10-13 19:54:05] INFO:  * Detected change in 'C:\\Users\\nosip\\OneDrive\\Desktop\\Login Contact List\\backend\\main.py', reloading
+[2025-10-13 19:54:07] WARNING:  * Debugger is active!
+[2025-10-13 19:54:07] INFO:  * Debugger PIN: 561-662-242
+[2025-10-13 19:54:31] INFO: 127.0.0.1 - - [13/Oct/2025 19:54:31] "OPTIONS /register HTTP/1.1" 200 -
+[2025-10-13 19:54:31] WARNING: Registration failed: Password must be at least 8 characters long for user 'hlwempuhope'
+[2025-10-13 19:54:31] INFO: 127.0.0.1 - - [13/Oct/2025 19:54:31] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+[2025-10-13 19:54:43] INFO: 127.0.0.1 - - [13/Oct/2025 19:54:43] "OPTIONS /register HTTP/1.1" 200 -
+[2025-10-13 19:54:43] WARNING: Registration failed: Password must contain at least one uppercase letter for user 'hlwempuhope'
+[2025-10-13 19:54:43] INFO: 127.0.0.1 - - [13/Oct/2025 19:54:43] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
